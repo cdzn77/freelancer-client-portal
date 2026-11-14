@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/images/repository-banner.png" alt="Freelancer Client Portal: Your work. Your clients. Your space. A graphite and cobalt portal frame surrounds conceptual project review panels." width="100%">
+</p>
+
 # Freelancer Client Portal
 
 A self-hosted, white-label workspace for freelancers and their clients. Manage projects, share files, collect feedback, prepare documents, and track time and billing under your own name.

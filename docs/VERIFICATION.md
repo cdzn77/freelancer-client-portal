@@ -21,4 +21,4 @@ Docker was not running on the authoring machine. Full backend migrations, a real
 
 Live SMTP/OAuth delivery, payment capture/webhooks, alternate storage providers, hosted AI, and a production deployment were not tested. Operators must configure and verify their own accounts. Automated accessibility checks do not establish complete WCAG conformance.
 
-The fast GitHub workflow runs build and template checks. The separate Full integration checks workflow starts an isolated backend for the broader suite when manually dispatched. Check its actual result before relying on it; inclusion of a workflow is not evidence that it passed.
+The fast GitHub workflow passed for the initial release: https://github.com/cdzn77/freelancer-client-portal/actions/runs/43652516497. It runs build and template checks. The separate Full integration checks workflow starts an isolated backend for the broader suite when manually dispatched. Check its actual result before relying on it; inclusion of a workflow is not evidence that it passed.
