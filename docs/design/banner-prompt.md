@@ -1,29 +1,31 @@
 # Repository banner
 
-Created November 14, 2026 with the built-in imagegen tool.
+Revised November 14, 2026 with the built-in imagegen tool in edit mode.
 
 Asset: ../images/repository-banner.png
 
-The banner is a conceptual product illustration. The README separately shows an actual sign-in screenshot.
+The banner uses a flat editorial composition with oversized typography, warm ivory, and a cobalt portal mark. It is a product identity image; the README separately shows an actual sign-in screenshot.
+
+Input: the previous repository banner from commit 49d941b.
 
 ## Final generation prompt
 
-Use case: ads-marketing
-Asset type: premium GitHub repository hero banner for a real open-source software product. Render a very wide 2:1 landscape composition at approximately 2560 x 1280, crisply finished and ready to publish.
+Use case: style-transfer
+Asset type: final GitHub repository banner, very wide 2:1 landscape, approximately 2560 x 1280.
+Input image 1 is the banner to redesign. Preserve the product name and white-label / self-hosted / open-source positioning, but replace its entire visual language.
 
-Product: Freelancer Client Portal. A white-label, self-hosted workspace for freelancers and their clients, with projects, files, reviews and documents. This is high-end software, presented with the art direction and care of an independent industrial-design studio.
+Primary request: Much less 3D, much more like an exceptional Semplice agency portfolio. A confident, flat, typographic editorial composition that feels art-directed by a prestigious independent design studio. Typography is the main visual. Design it like a beautiful contemporary design publication cover.
 
-Scene/backdrop: beautifully controlled near-black graphite background, subtle fine tactile grain, very restrained cobalt blue reflected light. Rich but quiet. No star field, no sci-fi visual noise.
-Composition: Strong generous 110px safe margins. Left 46 percent is precise editorial typography with plenty of breathing room. Right 54 percent is one carefully art-directed dimensional product sculpture: a large upright rounded-rectangular portal frame made from satin dark graphite and cobalt-anodized metal, an elegant offset second frame creating depth, and two partially overlapping ivory project-review interface panels floating through that opening. This is a conceptual product illustration, not a full browser screenshot. Use believable fine material edges, restrained perspective, exceptional contact shadows, physically coherent studio lighting. Asymmetric balance, intentional empty space. The typography and product sculpture must feel like one unified composition.
-Typography: exceptionally clean Swiss grotesk sans-serif; large confident display text, meticulous kerning and hierarchy, sharp ivory white. No serif, no faux futuristic fonts. Headline must dominate and read effortlessly at GitHub README size.
-Text, verbatim and spelled exactly, no extra promotional text:
-Small uppercase eyebrow: "WHITE-LABEL CLIENT WORKSPACE"
-Large main title on two lines: "Freelancer" and "Client Portal"
-Below main title, smaller: "Your work. Your clients. Your space."
-Bottom left in a restrained small monospaced line: "SELF-HOSTED / OPEN SOURCE"
-Product illustration panel one: "Brand identity", with a small green status "Ready for review", and three clean image/file thumbnail placeholders.
-Product illustration panel two: "Website launch", with a cobalt status "In progress" and a tasteful simple progress bar.
-Keep all interface details sparse and crisp: a few quiet gray divider rules, small circular avatars drawn as neutral initials, no tiny unreadable paragraphs, no fake analytics or prices.
-Color palette: graphite #11151C, near black #090C12, cool gray metal, ivory #F5F6F8, cobalt #2563EB and one muted green status accent.
-Mood: expensive, composed, precise, useful, quietly confident.
-Constraints: no ChrowmDesigns branding, no GitHub logo, no watermark, no exaggerated chrome blobs, no gradient rainbow, no laptop hardware, no phones, no generic dashboard mosaic, no decorative arrows. Do not add any claims, taglines, pricing, buttons, or text beyond the specified text. Preserve the open-source / self-hosted positioning.
+Art direction: warm off-white paper-colored background, almost-black type, one flat saturated cobalt accent. Sharp Swiss grotesk typography, oversized and meticulously kerned. Dramatic difference between extremely large title and tiny precise metadata. Generous whitespace, asymmetrical editorial alignment, thin black rules, restrained architectural structure. Absolutely flat solid-color graphic design. Clean, crisp, polished, no paper mockup or physical surface.
+
+Composition: a small top header with "WHITE-LABEL CLIENT WORKSPACE" at left and "SELF-HOSTED / OPEN SOURCE" at right, separated from the main composition by a delicate hairline rule. The huge product title occupies the central canvas on two lines: "Freelancer" then "Client Portal". The title is set with tight tracking and considered line spacing, nearly spanning the width but with generous safe margins. Use one bold flat cobalt geometric portal symbol in the open space to the right of the first line: a simple rectangular doorway-shaped graphic, integrated into the typographic grid, no outline frame in perspective. The second line is entirely unobstructed. Below, use a short quiet footer with the tagline left and a subtle hairline separator. Leave purposeful breathing room. The output should feel like a premium agency case-study cover at a glance, not a software sales template.
+
+Text verbatim, with accurate spelling; no other text:
+"WHITE-LABEL CLIENT WORKSPACE"
+"SELF-HOSTED / OPEN SOURCE"
+"Freelancer"
+"Client Portal"
+"Your work. Your clients. Your space."
+
+Palette: warm ivory #F1F0EA, soft black #171717, cobalt #2555F8. Typography may use only black; cobalt belongs to the flat portal graphic.
+Constraints: no three-dimensional objects, no metallic frames, no floating cards, no UI mockups, no gradients, no glows, no shadows, no bevels, no rendered materials, no devices, no decorative background pattern, no unnecessary badges, no added logo, no Semplice branding, no ChrowmDesigns branding, no stock illustration, no watermark. Keep the full title readable and every letter comfortably inside the image bounds. This is a complete replacement design, not a recolor of the original.

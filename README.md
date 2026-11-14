@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/repository-banner.png" alt="Freelancer Client Portal: Your work. Your clients. Your space. A graphite and cobalt portal frame surrounds conceptual project review panels." width="100%">
+  <img src="docs/images/repository-banner.png" alt="Freelancer Client Portal: Your work. Your clients. Your space. Oversized black typography on warm ivory with a flat cobalt portal mark." width="100%">
 </p>
 
 # Freelancer Client Portal
