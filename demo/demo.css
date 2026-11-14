@@ -1,0 +1,25 @@
+.demo-bar { position: relative; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 24px; background: #171717; color: #fff; font-family: "Inter Variable", sans-serif; }
+.demo-label,.demo-controls { display: flex; align-items: center; gap: 12px; }
+.demo-label strong { font-size: 13px; font-weight: 550; letter-spacing: -.25px; }
+.demo-dot { width: 7px; height: 7px; border-radius: 50%; background: #8fe5c5; }
+.demo-badge { font-size: 9px; letter-spacing: 1.2px; color: #c6c6c6; white-space: nowrap; }
+.demo-controls button,.demo-get { font-size: 11px; line-height: 1.2; white-space: nowrap; padding: 9px 11px; border: 0; border-radius: 5px; text-decoration: none; }
+.demo-switch { display: flex; gap: 2px; padding: 3px; border: 1px solid #555; border-radius: 7px; }
+.demo-switch button { background: transparent; color: #ccc; }
+.demo-switch button[aria-pressed="true"] { background: #fff; color: #171717; }
+.demo-quiet { background: transparent; color: #ddd; }
+.demo-quiet:hover { background: #333; }
+.demo-get { background: #2555f8; color: #fff; }
+.demo-bar :focus-visible { outline: 2px solid #99b7ff; outline-offset: 3px; }
+.demo-caption { padding: 6px 24px; background: #f1f0ea; color: #555; font-size: 10px; text-align: center; letter-spacing: .1px; }
+.demo-info { padding: 20px max(24px, calc((100vw - 1000px) / 2)); background: #f1f0ea; border-bottom: 1px solid #ddd; font-size: 13px; line-height: 1.7; }
+.demo-info p { margin: 5px 0 8px; }
+.demo-info a { text-decoration: underline; }
+.demo-error { padding: 80px 24px; max-width: 700px; margin: auto; }
+.demo-error p { margin: 20px 0; }
+@media (max-width: 1100px) { .demo-bar { align-items: flex-start; flex-direction: column; gap: 10px; padding: 12px 16px; } .demo-controls { flex-wrap: wrap; gap: 6px; } }
+@media (max-width: 540px) { .demo-label { gap: 8px; } .demo-controls { width: 100%; } .demo-controls button,.demo-get { font-size: 10px; padding: 8px; } .demo-get { margin-left: auto; } .demo-caption { font-size: 9px; padding: 6px 10px; } }
+.demo-chrome { position: sticky; top: 0; z-index: 100; }
+.app-shell .topbar { top: var(--demo-chrome-height, 90px); }
+.app-shell .sidebar { top: calc(var(--demo-chrome-height, 90px) + 92px); height: calc(100dvh - var(--demo-chrome-height, 90px) - 92px); }
+@media (max-width: 900px) { .app-shell .sidebar { top: var(--demo-chrome-height, 90px); height: calc(100dvh - var(--demo-chrome-height, 90px)); } }

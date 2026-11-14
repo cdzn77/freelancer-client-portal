@@ -1,0 +1,5 @@
+[build]
+  publish = "."
+
+# Copy this file beside the built static files for a manual demo deployment.
+# Never use the main application's Next.js deployment configuration here.

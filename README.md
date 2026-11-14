@@ -8,6 +8,10 @@ A self-hosted, white-label workspace for freelancers and their clients. Manage p
 
 Built with Next.js, React, TypeScript, and Supabase. This is a full application with a database and authentication, not a static GitHub Pages site.
 
+[**Open the live demo →**](https://freelancer-client-portal-demo.netlify.app)
+
+Explore the freelancer workspace and client view without creating an account. The demo uses fictional data; edits stay in your browser tab and reset on reload. Sending email, collecting payments, uploads, and external integrations require your own installation. [About the demo](docs/DEMO.md).
+
 [Download the installation and user guide](docs/Freelancer-Client-Portal-Guide.pdf) · [Read the guide online](docs/USER-GUIDE.md) · [Customize your brand](docs/BRANDING.md)
 
 ![White-label sign-in preview](docs/images/sign-in.png)
@@ -38,7 +42,7 @@ node --env-file=.env scripts/seed.mjs
 npm run dev
 ```
 
-Open [the local portal](http://127.0.0.1:3100). Demo passwords are `Studio-demo-2026!`.
+After the setup commands finish and the development server is running, enter `http://127.0.0.1:3100` in your browser. This address opens your own computer; it is separate from the public demo above. Local demo passwords are `Studio-demo-2026!`.
 
 | Email | Role |
 | --- | --- |

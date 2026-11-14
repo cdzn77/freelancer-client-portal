@@ -27,7 +27,10 @@
     "test:connected": "node --import tsx scripts/check-connected-workflows.ts",
     "setup": "node scripts/setup.mjs",
     "setup:admin": "node --env-file=.env scripts/create-admin.mjs",
-    "test:template": "node --import tsx scripts/check-white-label.tsx && node --test scripts/check-create-admin.mjs"
+    "test:template": "node --import tsx scripts/check-white-label.tsx && node --test scripts/check-create-admin.mjs",
+    "build:demo": "node demo/build.mjs",
+    "test:demo": "node --import tsx --test demo/backend.test.ts",
+    "test:demo:browser": "node demo/check.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1136.0",
@@ -66,7 +69,8 @@
     "tailwindcss": "^4.1.0",
     "tsx": "^4.20.0",
     "typescript": "^5.9.0",
-    "esbuild": "^0.28.2"
+    "esbuild": "^0.28.2",
+    "postcss": "^8.5.28"
   },
   "license": "MIT",
   "engines": {
