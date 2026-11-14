@@ -1,0 +1,55 @@
+name: Full integration checks
+on: [workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/setup.mjs
+      - run: docker compose up -d --wait --wait-timeout 240 db auth rest realtime storage api-gw meta mailpit
+      - run: sh scripts/migrate.sh
+      - run: node --env-file=.env scripts/seed.mjs
+      - run: node --env-file=.env --import tsx scripts/check-member-api.ts
+      - run: docker compose exec -T db psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/sql/permanent-trash.sql
+      - run: docker compose exec -T db psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/sql/workspace-deletion.sql
+      - run: docker compose exec -T db psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/sql/website-monitor.sql
+      - run: docker compose exec -T db psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/sql/studio-expenses.sql
+      - run: npx playwright install --with-deps chrome
+      - run: npm run build
+      - run: npm run typecheck
+      - run: npm run test:dashboard
+      - run: npm run test:members
+      - run: npm run test:security
+      - run: npm run test:expense-mail
+      - run: npm run test:expenses
+      - run: npm run test:search
+      - run: npm run test:monitor
+      - run: npm run test:select
+      - run: node --import tsx scripts/check-discussion-email.ts
+      - run: docker compose exec -T db psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/sql/client-collaboration.sql
+      - run: docker compose exec -T db psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/sql/playbook-blueprints.sql
+      - run: docker compose exec -T db psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/sql/financial-foundation.sql
+      - run: docker compose exec -T db psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/sql/approved-scope-budget.sql
+      - run: docker compose exec -T db psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/sql/billing-automation.sql
+      - run: docker compose exec -T db psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/sql/expense-time-reports.sql
+      - run: npm run test:connected
+      - run: docker compose exec -T db psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/sql/connected-workflows.sql
+      - run: node --import tsx scripts/check-client-portal.tsx
+      - run: npm run test:startup
+      - run: npm test
+      - name: Show service status on failure
+        if: failure()
+        run: docker compose ps
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-results
+          path: playwright-report/

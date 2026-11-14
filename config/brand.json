@@ -1,0 +1,13 @@
+{
+  "appName": "Freelancer Client Portal",
+  "name": "Example Studio",
+  "ownerName": "Alex Freelancer",
+  "email": "studio@example.com",
+  "websiteUrl": "https://example.com",
+  "portalUrl": "http://localhost:3100",
+  "logoPath": "",
+  "faviconPath": "/brand/favicon.svg",
+  "tagline": "Your work. Your clients. Your space.",
+  "accentColor": "#2563eb",
+  "accentTextColor": "#ffffff"
+}

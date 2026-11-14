@@ -1,0 +1,35 @@
+node_modules/
+.next/
+.env*
+!.env.example
+test-results/
+playwright-report/
+*.tsbuildinfo
+infra/supabase/volumes/db/data/
+infra/supabase/volumes/storage/
+infra/supabase/.env
+
+var/
+
+.netlify/
+
+supabase/.temp/
+
+# Local OS, launcher binaries, and captured workspace images
+.DS_Store
+*.app/
+docs/screenshots/
+
+/public/vendor/pdf.worker.min.mjs
+
+# Downloaded OAuth credentials must never enter source control.
+/client_secret_*.json
+
+# Documentation build environments and private operator files
+.venv*/
+__pycache__/
+*.pyc
+*.pem
+*.key
+*.p12
+*.sql.gz

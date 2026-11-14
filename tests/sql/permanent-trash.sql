@@ -1,0 +1,53 @@
+\set ON_ERROR_STOP on
+begin;
+do $$
+declare u uuid; w uuid:=gen_random_uuid(); other uuid:=gen_random_uuid(); p uuid:=gen_random_uuid(); keep uuid:=gen_random_uuid(); b uuid:=gen_random_uuid(); req uuid:=gen_random_uuid(); bp uuid:=gen_random_uuid(); d uuid:=gen_random_uuid(); v uuid:=gen_random_uuid(); f uuid:=gen_random_uuid(); task uuid:=gen_random_uuid(); notice uuid; amount integer; denied boolean;
+begin
+ select id into u from auth.users limit 1;
+ if u is null then raise exception 'Local test user required';end if;
+ perform set_config('request.jwt.claim.sub',u::text,true);
+ insert into workspaces(id,name) values(w,'Disposable Trash verification'),(other,'Other workspace');
+ insert into workspace_members(workspace_id,user_id,role,display_name) values(w,u,'owner','Test administrator');
+ insert into projects(id,workspace_id,name) values(p,w,'Purge fixture'),(keep,w,'Keep active');
+ insert into tasks(id,workspace_id,project_id,title,assignee_id,estimated_minutes) values(task,w,p,'Task fixture',u,60);
+ insert into task_allocations(workspace_id,project_id,task_id,user_id,work_date,minutes) values(w,p,task,u,current_date,60);
+ insert into tasks(workspace_id,project_id,parent_task_id,title) values(w,p,task,'Subtask fixture');
+ insert into budgets(id,workspace_id,project_id,amount) values(b,w,p,100);
+ insert into work_requests(id,workspace_id,title,kind,brief,project_id) values(req,w,'Request fixture','Other','Test brief',p);
+ insert into studio_blueprints(id,workspace_id,name,steps) values(bp,w,'Blueprint fixture','[{"title":"Task","offset_days":0}]');
+ insert into blueprint_applications(workspace_id,project_id,blueprint_id,blueprint_name,blueprint_revision,steps,starts_on) values(w,p,bp,'Blueprint fixture',1,'[]',current_date);
+ insert into project_files(id,workspace_id,project_id,path,name) values(f,w,p,w::text||'/'||p::text||'/test.txt','test.txt');
+ insert into deliverables(id,workspace_id,project_id,title) values(d,w,p,'Review fixture');
+ insert into deliverable_versions(id,workspace_id,project_id,deliverable_id,file_id,version_number) values(v,w,p,d,f,1);
+ update deliverables set current_version_id=v where id=d;
+ insert into review_feedback(workspace_id,project_id,version_id,body) values(w,p,v,'Feedback fixture');
+ insert into review_stages(workspace_id,project_id,version_id,position,reviewer_id) values(w,p,v,1,u);
+ insert into time_entries(workspace_id,project_id,description,minutes) values(w,p,'Time fixture',30);
+ insert into invoices(workspace_id,project_id,number,client_name,lines) values(w,p,'TEST','Test','[{"description":"Test","quantity":1,"rate":100}]');
+ -- Active and mixed-state selections fail atomically.
+ denied:=false;begin perform purge_trash(w,'project',array[p]);exception when others then denied:=true;end;
+ if not denied then raise exception 'Active project purge permitted';end if;
+ update projects set deleted_at=now() where id=p;
+ denied:=false;begin perform purge_trash(w,'project',array[p,keep]);exception when others then denied:=true;end;
+ if not denied or not exists(select 1 from projects where id=p) then raise exception 'Mixed selection not atomic';end if;
+ denied:=false;begin perform purge_trash(other,'project',array[p]);exception when others then denied:=true;end;
+ if not denied then raise exception 'Cross-workspace purge permitted';end if;
+ update workspace_members set role='member' where workspace_id=w;
+ denied:=false;begin perform purge_trash(w,'project',array[p]);exception when others then denied:=true;end;
+ if not denied then raise exception 'Member purge permitted';end if;
+ update workspace_members set role='owner' where workspace_id=w;
+ amount:=purge_trash(w,'project',array[p]);
+ if amount<>1 or exists(select 1 from projects where id=p) or not exists(select 1 from projects where id=keep) then raise exception 'Project purge failed';end if;
+ if exists(select 1 from tasks where project_id=p) or exists(select 1 from audit_log where workspace_id=w and (entity like '%'||p::text||'%' or entity like '%'||task::text||'%')) or exists(select 1 from studio_notifications where workspace_id=w) then raise exception 'Project references remain';end if;
+ if exists(select 1 from task_allocations where project_id=p) then raise exception 'Purged allocations remain';end if;
+ if not exists(select 1 from trash_file_cleanup where workspace_id=w) then raise exception 'File cleanup lost';end if;
+ if not exists(select 1 from studio_blueprints where id=bp) then raise exception 'Reusable blueprint removed with project';end if;
+ update studio_blueprints set deleted_at=now() where id=bp;perform purge_trash(w,'blueprint',array[bp]);
+ insert into budgets(id,workspace_id,project_id,amount,deleted_at) values(b,w,keep,50,now());perform purge_trash(w,'budget',array[b]);
+ insert into work_requests(id,workspace_id,title,kind,brief,deleted_at) values(req,w,'Trash request','Other','Brief',now());perform purge_trash(w,'request',array[req]);
+ insert into studio_notifications(workspace_id,user_id,title,event_key,deleted_at) values(w,u,'Trashed notice','test:'||gen_random_uuid(),now()) returning id into notice;perform purge_trash(w,'notification',array[notice]);
+ insert into deliverables(id,workspace_id,project_id,title,deleted_at) values(d,w,keep,'Trashed review',now());perform purge_trash(w,'deliverable',array[d]);
+ if exists(select 1 from budgets where id=b) or exists(select 1 from work_requests where id=req) or exists(select 1 from deliverables where id=d) or exists(select 1 from studio_notifications where id=notice) then raise exception 'Trash scope retained rows';end if;
+ raise notice 'PASS: all six scopes, mixed-state atomicity, member denial, tenant isolation, history removal, retained active project, durable file cleanup';
+end $$;
+rollback;

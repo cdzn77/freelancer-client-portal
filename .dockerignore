@@ -1,0 +1,8 @@
+node_modules
+.next
+.env*
+infra/supabase/volumes/db/data
+infra/supabase/volumes/storage
+.git
+test-results
+var

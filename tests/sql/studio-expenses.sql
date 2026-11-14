@@ -1,0 +1,32 @@
+\set ON_ERROR_STOP on
+begin;
+create temporary table expense_fixture as select gen_random_uuid() w,gen_random_uuid() other,gen_random_uuid() plan,(select id from auth.users limit 1) u;
+insert into workspaces(id,name) select w,'Expense fixture' from expense_fixture union all select other,'Other expense fixture' from expense_fixture;
+insert into workspace_members(workspace_id,user_id,role,display_name) select w,u,'owner','Fixture admin' from expense_fixture;
+insert into studio_cost_plans(id,workspace_id,name,category,amount,frequency,starts_on) select plan,w,'Subscription','AI services',20,'Monthly','2026-01-31' from expense_fixture;
+insert into studio_cost_payments(workspace_id,plan_id,name,category,amount,frequency,paid_on,scheduled_for) select w,plan,'Subscription snapshot','AI services',20,'Monthly','2026-02-01','2026-01-31' from expense_fixture;
+do $$ declare f record; denied boolean;begin
+ select * into f from expense_fixture;
+ denied:=false;begin insert into studio_cost_payments(workspace_id,plan_id,name,category,amount,frequency,paid_on) values(f.other,f.plan,'Wrong tenant','AI services',20,'Monthly','2026-01-31');exception when foreign_key_violation then denied:=true;end;
+ if not denied then raise exception 'Cross-workspace subscription link allowed';end if;
+ denied:=false;begin insert into studio_cost_payments(workspace_id,plan_id,name,category,amount,frequency,paid_on,scheduled_for) values(f.w,f.plan,'Duplicate','AI services',20,'Monthly','2026-02-01','2026-01-31');exception when unique_violation then denied:=true;end;
+ if not denied then raise exception 'Duplicate subscription charge allowed';end if;
+ update studio_cost_plans set amount=40,name='Renamed' where id=f.plan;
+ if (select amount from studio_cost_payments where workspace_id=f.w)<>20 then raise exception 'Historical payment changed';end if;
+ delete from studio_cost_plans where id=f.plan;
+ if not exists(select 1 from studio_cost_payments where workspace_id=f.w and plan_id is null and name='Subscription snapshot') then raise exception 'Plan deletion removed payment history';end if;
+ perform set_config('request.jwt.claim.sub',f.u::text,true);
+end $$;
+set local role authenticated;
+do $$ declare n int;begin select count(*) into n from studio_cost_payments where name='Subscription snapshot';if n<>1 then raise exception 'Admin read failed';end if;end $$;
+reset role;
+update workspace_members set role='member' where workspace_id=(select w from expense_fixture);
+set local role authenticated;
+do $$ declare n int;begin select count(*) into n from studio_cost_payments where name='Subscription snapshot';if n<>0 then raise exception 'Nonadmin sees expenses';end if;end $$;
+reset role;
+update workspace_members set role='owner' where workspace_id=(select w from expense_fixture);
+insert into studio_cost_plans(id,workspace_id,name,category,amount,frequency,starts_on) select plan,w,'Cascade plan','AI services',20,'Monthly','2026-01-31' from expense_fixture;
+insert into studio_cost_payments(workspace_id,plan_id,name,category,amount,frequency,paid_on) select w,plan,'Cascade payment','AI services',20,'Monthly','2026-02-01' from expense_fixture;
+select delete_workspace(w,'Expense fixture') from expense_fixture;
+do $$ begin if exists(select 1 from studio_cost_payments where name in ('Subscription snapshot','Cascade payment')) then raise exception 'Workspace purge retained payments';end if;end $$;
+rollback;

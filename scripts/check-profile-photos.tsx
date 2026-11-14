@@ -1,0 +1,42 @@
+import assert from "node:assert/strict";
+import { JSDOM } from "jsdom";
+import { validateProfilePhoto } from "../lib/profile-photo";
+async function main() {
+  const dom = new JSDOM("<!doctype html><html><body></body></html>", { url: "http://localhost" });
+  for (const key of ["window", "document", "navigator", "HTMLElement", "HTMLInputElement", "Node", "Event", "MutationObserver"])
+    Object.defineProperty(globalThis, key, { configurable: true, value: (dom.window as any)[key] });
+  (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
+  process.env.NEXT_PUBLIC_SUPABASE_URL = "http://127.0.0.1:8000";
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = "test";
+  const React = await import("react");
+  const { render, fireEvent, cleanup, waitFor } = await import("@testing-library/react");
+  const { Avatar } = await import("../components/ui");
+  const { AvatarProvider, AvatarContext } = await import("../components/avatar-provider");
+  const { supabase } = await import("../lib/supabase");
+  const calls: string[][] = [];
+  (supabase.storage as any).from = () => ({ createSignedUrls: async (paths: string[]) => { calls.push(paths); return { data: paths.map(path => ({ path, signedUrl: path.startsWith("a/") ? "https://example.invalid/a.jpg?token=test" : "", error: path.startsWith("a/") ? null : "not found" })) }; } });
+  const view = render(<AvatarProvider userIds={["a", "b", "a"]}><Avatar name="Same Name" userId="a" /><Avatar name="Same Name" userId="b" /></AvatarProvider>);
+  await waitFor(() => assert.equal(view.container.querySelectorAll("img").length, 1));
+  assert.deepEqual(calls[0], ["a/avatar.jpg", "b/avatar.jpg"]);
+  assert.equal(view.container.querySelectorAll(".avatar")[1].textContent, "SN");
+  fireEvent.error(view.container.querySelector("img")!);
+  assert.equal(view.container.querySelectorAll("img").length, 0);
+  assert.equal(view.container.querySelectorAll(".avatar")[0].textContent, "SN");
+  cleanup();
+  const refresh = async () => {};
+  const changed = render(<AvatarContext.Provider value={{ urls: { a: "https://example.invalid/one.jpg" }, refresh }}><Avatar name="Alex Freelancer" userId="a" /><Avatar name="Alex Freelancer" userId="a" /></AvatarContext.Provider>);
+  changed.rerender(<AvatarContext.Provider value={{ urls: { a: "https://example.invalid/two.jpg" }, refresh }}><Avatar name="Alex Freelancer" userId="a" /><Avatar name="Alex Freelancer" userId="a" /></AvatarContext.Provider>);
+  assert.ok(Array.from(changed.container.querySelectorAll("img")).every(i => i.src.endsWith("two.jpg")));
+  changed.rerender(<AvatarContext.Provider value={{ urls: {}, refresh }}><Avatar name="Alex Freelancer" userId="a" /><Avatar name="Alex Freelancer" userId="a" /></AvatarContext.Provider>);
+  assert.equal(changed.container.querySelectorAll("img").length, 0);
+  assert.equal(changed.container.textContent, "AMAM");
+  cleanup();
+  for (const type of ["image/jpeg", "image/png", "image/webp"]) validateProfilePhoto({ type, size: 1024 });
+  assert.throws(() => validateProfilePhoto({ type: "image/svg+xml", size: 1024 }));
+  assert.throws(() => validateProfilePhoto({ type: "image/jpeg", size: 6 * 1024 * 1024 }));
+  assert.throws(() => validateProfilePhoto({ type: "image/png", size: 0 }));
+  console.log("PASS: avatar identity isolation, shared updates, removal, broken-image fallback, upload type and size limits.");
+  dom.window.close();
+  process.exit(0);
+}
+main().catch(e => { console.error(e); process.exit(1); });

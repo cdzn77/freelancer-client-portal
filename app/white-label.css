@@ -1,0 +1,6 @@
+/* White-label theme. */
+.brand-wordmark { display: block; font-weight: 700; font-size: 19px; letter-spacing: -.04em; overflow-wrap: anywhere; }
+.button.primary, .primary-button { background: var(--brand-accent); color: var(--brand-accent-text); }
+.button.primary:hover, .primary-button:hover { filter: brightness(.92); }
+
+.app-footer a { text-decoration: underline; text-underline-offset: 3px; }

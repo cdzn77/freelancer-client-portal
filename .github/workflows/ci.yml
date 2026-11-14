@@ -1,0 +1,20 @@
+name: Build and template checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run test:template
+      - run: node --import tsx scripts/check-client-portal.tsx
+      - run: npm run test:documents
+      - run: npm run build

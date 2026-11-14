@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "24"
+  NETLIFY_NEXT_SKEW_PROTECTION = "true"
+# Supabase values must be configured in Netlify, not committed here.
+# Explicit adapter configuration also supports projects created through the API.
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

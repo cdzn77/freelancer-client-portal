@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "name": "Shape 01",
+    "file": "/shapes/shape-01.svg"
+  },
+  {
+    "id": 2,
+    "name": "Shape 02",
+    "file": "/shapes/shape-02.svg"
+  },
+  {
+    "id": 3,
+    "name": "Shape 03",
+    "file": "/shapes/shape-03.svg"
+  },
+  {
+    "id": 4,
+    "name": "Shape 04",
+    "file": "/shapes/shape-04.svg"
+  },
+  {
+    "id": 5,
+    "name": "Shape 05",
+    "file": "/shapes/shape-05.svg"
+  },
+  {
+    "id": 6,
+    "name": "Shape 06",
+    "file": "/shapes/shape-06.svg"
+  },
+  {
+    "id": 7,
+    "name": "Shape 07",
+    "file": "/shapes/shape-07.svg"
+  },
+  {
+    "id": 8,
+    "name": "Shape 08",
+    "file": "/shapes/shape-08.svg"
+  },
+  {
+    "id": 9,
+    "name": "Shape 09",
+    "file": "/shapes/shape-09.svg"
+  },
+  {
+    "id": 10,
+    "name": "Shape 10",
+    "file": "/shapes/shape-10.svg"
+  },
+  {
+    "id": 11,
+    "name": "Shape 11",
+    "file": "/shapes/shape-11.svg"
+  },
+  {
+    "id": 12,
+    "name": "Shape 12",
+    "file": "/shapes/shape-12.svg"
+  },
+  {
+    "id": 13,
+    "name": "Shape 13",
+    "file": "/shapes/shape-13.svg"
+  },
+  {
+    "id": 14,
+    "name": "Shape 14",
+    "file": "/shapes/shape-14.svg"
+  },
+  {
+    "id": 15,
+    "name": "Shape 15",
+    "file": "/shapes/shape-15.svg"
+  },
+  {
+    "id": 16,
+    "name": "Shape 16",
+    "file": "/shapes/shape-16.svg"
+  },
+  {
+    "id": 17,
+    "name": "Shape 17",
+    "file": "/shapes/shape-17.svg"
+  },
+  {
+    "id": 18,
+    "name": "Shape 18",
+    "file": "/shapes/shape-18.svg"
+  },
+  {
+    "id": 19,
+    "name": "Shape 19",
+    "file": "/shapes/shape-19.svg"
+  },
+  {
+    "id": 20,
+    "name": "Shape 20",
+    "file": "/shapes/shape-20.svg"
+  },
+  {
+    "id": 21,
+    "name": "Shape 21",
+    "file": "/shapes/shape-21.svg"
+  },
+  {
+    "id": 22,
+    "name": "Shape 22",
+    "file": "/shapes/shape-22.svg"
+  },
+  {
+    "id": 23,
+    "name": "Shape 23",
+    "file": "/shapes/shape-23.svg"
+  },
+  {
+    "id": 24,
+    "name": "Shape 24",
+    "file": "/shapes/shape-24.svg"
+  },
+  {
+    "id": 25,
+    "name": "Shape 25",
+    "file": "/shapes/shape-25.svg"
+  },
+  {
+    "id": 26,
+    "name": "Shape 26",
+    "file": "/shapes/shape-26.svg"
+  },
+  {
+    "id": 27,
+    "name": "Shape 27",
+    "file": "/shapes/shape-27.svg"
+  },
+  {
+    "id": 28,
+    "name": "Shape 28",
+    "file": "/shapes/shape-28.svg"
+  },
+  {
+    "id": 29,
+    "name": "Shape 29",
+    "file": "/shapes/shape-29.svg"
+  },
+  {
+    "id": 30,
+    "name": "Shape 30",
+    "file": "/shapes/shape-30.svg"
+  },
+  {
+    "id": 31,
+    "name": "Shape 31",
+    "file": "/shapes/shape-31.svg"
+  },
+  {
+    "id": 32,
+    "name": "Shape 32",
+    "file": "/shapes/shape-32.svg"
+  },
+  {
+    "id": 33,
+    "name": "Shape 33",
+    "file": "/shapes/shape-33.svg"
+  },
+  {
+    "id": 34,
+    "name": "Shape 34",
+    "file": "/shapes/shape-34.svg"
+  },
+  {
+    "id": 35,
+    "name": "Shape 35",
+    "file": "/shapes/shape-35.svg"
+  },
+  {
+    "id": 36,
+    "name": "Shape 36",
+    "file": "/shapes/shape-36.svg"
+  },
+  {
+    "id": 37,
+    "name": "Shape 37",
+    "file": "/shapes/shape-37.svg"
+  },
+  {
+    "id": 38,
+    "name": "Shape 38",
+    "file": "/shapes/shape-38.svg"
+  },
+  {
+    "id": 39,
+    "name": "Shape 39",
+    "file": "/shapes/shape-39.svg"
+  },
+  {
+    "id": 40,
+    "name": "Shape 40",
+    "file": "/shapes/shape-40.svg"
+  },
+  {
+    "id": 41,
+    "name": "Shape 41",
+    "file": "/shapes/shape-41.svg"
+  },
+  {
+    "id": 42,
+    "name": "Shape 42",
+    "file": "/shapes/shape-42.svg"
+  },
+  {
+    "id": 43,
+    "name": "Shape 43",
+    "file": "/shapes/shape-43.svg"
+  },
+  {
+    "id": 44,
+    "name": "Shape 44",
+    "file": "/shapes/shape-44.svg"
+  },
+  {
+    "id": 45,
+    "name": "Shape 45",
+    "file": "/shapes/shape-45.svg"
+  },
+  {
+    "id": 46,
+    "name": "Shape 46",
+    "file": "/shapes/shape-46.svg"
+  },
+  {
+    "id": 47,
+    "name": "Shape 47",
+    "file": "/shapes/shape-47.svg"
+  },
+  {
+    "id": 48,
+    "name": "Shape 48",
+    "file": "/shapes/shape-48.svg"
+  },
+  {
+    "id": 49,
+    "name": "Shape 49",
+    "file": "/shapes/shape-49.svg"
+  },
+  {
+    "id": 50,
+    "name": "Shape 50",
+    "file": "/shapes/shape-50.svg"
+  },
+  {
+    "id": 51,
+    "name": "Shape 51",
+    "file": "/shapes/shape-51.svg"
+  },
+  {
+    "id": 52,
+    "name": "Shape 52",
+    "file": "/shapes/shape-52.svg"
+  },
+  {
+    "id": 53,
+    "name": "Shape 53",
+    "file": "/shapes/shape-53.svg"
+  },
+  {
+    "id": 54,
+    "name": "Shape 54",
+    "file": "/shapes/shape-54.svg"
+  },
+  {
+    "id": 55,
+    "name": "Shape 55",
+    "file": "/shapes/shape-55.svg"
+  },
+  {
+    "id": 56,
+    "name": "Shape 56",
+    "file": "/shapes/shape-56.svg"
+  },
+  {
+    "id": 57,
+    "name": "Shape 57",
+    "file": "/shapes/shape-57.svg"
+  },
+  {
+    "id": 58,
+    "name": "Shape 58",
+    "file": "/shapes/shape-58.svg"
+  },
+  {
+    "id": 59,
+    "name": "Shape 59",
+    "file": "/shapes/shape-59.svg"
+  },
+  {
+    "id": 60,
+    "name": "Shape 60",
+    "file": "/shapes/shape-60.svg"
+  },
+  {
+    "id": 61,
+    "name": "Shape 61",
+    "file": "/shapes/shape-61.svg"
+  },
+  {
+    "id": 62,
+    "name": "Shape 62",
+    "file": "/shapes/shape-62.svg"
+  },
+  {
+    "id": 63,
+    "name": "Shape 63",
+    "file": "/shapes/shape-63.svg"
+  },
+  {
+    "id": 64,
+    "name": "Shape 64",
+    "file": "/shapes/shape-64.svg"
+  },
+  {
+    "id": 65,
+    "name": "Shape 65",
+    "file": "/shapes/shape-65.svg"
+  },
+  {
+    "id": 66,
+    "name": "Shape 66",
+    "file": "/shapes/shape-66.svg"
+  },
+  {
+    "id": 67,
+    "name": "Shape 67",
+    "file": "/shapes/shape-67.svg"
+  },
+  {
+    "id": 68,
+    "name": "Shape 68",
+    "file": "/shapes/shape-68.svg"
+  },
+  {
+    "id": 69,
+    "name": "Shape 69",
+    "file": "/shapes/shape-69.svg"
+  },
+  {
+    "id": 70,
+    "name": "Shape 70",
+    "file": "/shapes/shape-70.svg"
+  },
+  {
+    "id": 71,
+    "name": "Shape 71",
+    "file": "/shapes/shape-71.svg"
+  },
+  {
+    "id": 72,
+    "name": "Shape 72",
+    "file": "/shapes/shape-72.svg"
+  }
+]
